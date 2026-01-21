@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://asesoriafinancierateran.com/sitemap-index.xml

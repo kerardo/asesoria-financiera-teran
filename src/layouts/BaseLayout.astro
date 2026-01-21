@@ -6,19 +6,133 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  type?: string;
 }
 
-const { title, description = 'Asesoría financiera personalizada. Seguros, inversiones y planes de retiro con respaldo GNP.' } = Astro.props;
+const {
+  title,
+  description = 'Asesoría financiera personalizada en México. Seguros, inversiones, créditos y planes de retiro con respaldo de las mejores instituciones. Consulta gratuita.',
+  image = '/images/og-image.jpg',
+  type = 'website'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const fullTitle = title === 'Inicio' ? 'Asesoría Financiera Terán | Seguros, Inversiones y Créditos en México' : `${title} | Asesoría Financiera Terán`;
+
+// Schema markup para negocio local
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  "name": "Asesoría Financiera Terán",
+  "description": "Asesoría financiera personalizada. Seguros, inversiones, créditos y planes de retiro.",
+  "url": "https://asesoriafinancierateran.com",
+  "telephone": "+52 55 6413 0072",
+  "email": "contacto@asesoriafinancierateran.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "MX"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "México"
+  },
+  "openingHours": "Mo-Fr 09:00-18:00",
+  "priceRange": "$$",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios Financieros",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Seguros",
+          "description": "Seguros de vida, salud, auto y hogar"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Inversiones",
+          "description": "Inversión inteligente en acciones, fondos y bonos"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Créditos",
+          "description": "Créditos personales, auto, hipotecarios y empresariales"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Planes de Retiro",
+          "description": "Estrategias de jubilación personalizadas"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Asesoría Jurídica",
+          "description": "Derecho civil, familiar y patrimonial"
+        }
+      }
+    ]
+  },
+  "sameAs": [
+    "https://wa.me/5564130072"
+  ]
+};
 ---
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Básico -->
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="MX" />
+    <meta name="geo.placename" content="México" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:site_name" content="Asesoría Financiera Terán" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title} | Asesoría Financiera Terán</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />
+
+    <!-- Preconnect para performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
   </head>
   <body>
     <Header />
