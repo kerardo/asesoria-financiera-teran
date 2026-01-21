@@ -5,7 +5,9 @@
 **Nombre del proyecto:** Asesoría Financiera Terán
 **Tecnología:** Astro 5.16.11
 **Tipo:** Sitio web de servicios financieros
-**Estado:** En desarrollo activo
+**Estado:** En producción
+**Dominio:** https://asesoriafinancierateran.com
+**Repositorio:** https://github.com/kerardo/asesoria-financiera-teran
 
 ---
 
@@ -14,7 +16,7 @@
 ### Datos de Contacto
 - **Email:** contacto@asesoriafinancierateran.com
 - **WhatsApp:** +52 55 6413 0072
-- **Ubicación:** Ciudad de México (no se muestra públicamente)
+- **Cobertura:** Todo México (nacional)
 
 ### Equipo
 | Nombre | Rol |
@@ -36,31 +38,96 @@
 
 ---
 
+## Hosting y Deploy
+
+### Hostinger
+- **Tipo:** Hosting Web compartido
+- **FTP Host:** 195.179.239.72
+- **Usuario FTP:** (configurado en GitHub Secrets)
+
+### Deploy Automático con GitHub Actions
+El sitio se despliega automáticamente a Hostinger cada vez que se hace push a la rama `main`.
+
+**Archivo de configuración:** `.github/workflows/deploy.yml`
+
+**Flujo de deploy:**
+1. Hacer cambios en el código
+2. `git add .`
+3. `git commit -m "Descripción del cambio"`
+4. `git push`
+5. GitHub Actions construye y despliega automáticamente (~2 min)
+
+**GitHub Secrets necesarios:**
+| Secret | Descripción |
+|--------|-------------|
+| `FTP_HOST` | IP del servidor FTP (195.179.239.72) |
+| `FTP_USERNAME` | Usuario FTP de Hostinger |
+| `FTP_PASSWORD` | Contraseña FTP |
+
+**Ver estado del deploy:** https://github.com/kerardo/asesoria-financiera-teran/actions
+
+---
+
+## SEO Implementado
+
+### Optimizaciones Técnicas
+- [x] **Sitemap XML** - Generado automáticamente con @astrojs/sitemap
+- [x] **robots.txt** - Configurado en `/public/robots.txt`
+- [x] **Open Graph tags** - Para compartir en Facebook/LinkedIn
+- [x] **Twitter Cards** - Para compartir en Twitter
+- [x] **Canonical URLs** - Evita contenido duplicado
+- [x] **Schema.org JSON-LD** - Markup de negocio financiero
+- [x] **Meta descriptions** - Optimizadas por página
+- [x] **lang="es-MX"** - Idioma español México
+
+### URLs SEO Importantes
+- Sitemap: `https://asesoriafinancierateran.com/sitemap-index.xml`
+- Robots: `https://asesoriafinancierateran.com/robots.txt`
+
+### Pendiente SEO
+- [ ] **Imagen OG** - Crear `/public/images/og-image.jpg` (1200x630px)
+- [ ] Registrar en Google Search Console
+- [ ] Registrar en Google Business Profile
+- [ ] Obtener backlinks
+
+---
+
 ## Estructura del Proyecto
 
 ```
-src/
-├── components/
-│   ├── Header.astro        # Navegación con menú móvil funcional
-│   └── Footer.astro        # Footer con contacto (solo email y WhatsApp)
-├── layouts/
-│   ├── BaseLayout.astro    # Layout principal con SEO
-│   └── ServicioLayout.astro # Layout para páginas de servicios individuales
-├── pages/
-│   ├── index.astro         # Página de inicio
-│   ├── nosotros.astro      # Página del equipo
-│   ├── faqs.astro          # Preguntas frecuentes (accordion)
-│   ├── contacto.astro      # Formulario con integración n8n
-│   └── servicios/
-│       ├── index.astro     # Índice de servicios (cards)
-│       ├── seguros.astro
-│       ├── inversiones.astro
-│       ├── creditos.astro
-│       ├── educativo.astro
-│       ├── retiro.astro
-│       └── juridico.astro
-└── styles/
-    └── global.css          # Variables CSS y estilos globales
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          # GitHub Actions para deploy a Hostinger
+├── public/
+│   ├── favicon.svg
+│   ├── robots.txt              # SEO
+│   └── images/
+│       └── hero-bg.jpg
+├── src/
+│   ├── components/
+│   │   ├── Header.astro        # Navegación con menú móvil funcional
+│   │   └── Footer.astro        # Footer con contacto
+│   ├── layouts/
+│   │   ├── BaseLayout.astro    # Layout principal con SEO completo
+│   │   └── ServicioLayout.astro # Layout para páginas de servicios
+│   ├── pages/
+│   │   ├── index.astro         # Página de inicio
+│   │   ├── nosotros.astro      # Página del equipo
+│   │   ├── faqs.astro          # Preguntas frecuentes
+│   │   ├── contacto.astro      # Formulario de contacto
+│   │   └── servicios/
+│   │       ├── index.astro     # Índice de servicios
+│   │       ├── seguros.astro
+│   │       ├── inversiones.astro
+│   │       ├── creditos.astro
+│   │       ├── educativo.astro
+│   │       ├── retiro.astro
+│   │       └── juridico.astro
+│   └── styles/
+│       └── global.css          # Variables CSS y estilos globales
+├── astro.config.mjs            # Configuración de Astro + sitemap
+├── package.json
+└── CONTEXTO-PROYECTO.md        # Este archivo
 ```
 
 ---
@@ -83,23 +150,28 @@ src/
 
 ### ✅ Completado
 - [x] Página de inicio con hero slider, servicios, ventajas y CTA
-- [x] **Hero Slider** con 3 slides promocionales y auto-play
-- [x] **Imagen de fondo en hero** con overlay degradado
+- [x] Hero Slider con 3 slides promocionales y auto-play
+- [x] Imagen de fondo en hero con overlay degradado
 - [x] Página "Nosotros" con equipo (placeholders para fotos)
 - [x] Página de servicios (índice con cards)
-- [x] 6 subpáginas de servicios individuales (diseño orientado a conversión)
+- [x] 6 subpáginas de servicios individuales
 - [x] Página de FAQs con accordion interactivo
 - [x] Página de contacto con formulario
-- [x] Header con navegación, menú móvil responsive y **submenú de servicios**
+- [x] Header con navegación, menú móvil responsive y submenú de servicios
 - [x] Footer actualizado (solo email y WhatsApp)
 - [x] Diseño responsive completo
+- [x] Deploy automático a Hostinger via GitHub Actions
+- [x] SEO técnico completo (sitemap, robots, OG, schema, etc.)
 
 ### 🔲 Pendiente
 - [ ] Integración del webhook de n8n (placeholder en contacto.astro)
 - [ ] Fotos reales del equipo
+- [ ] Imagen OG para redes sociales (1200x630px)
 - [ ] Redes sociales reales (Facebook, Instagram)
 - [ ] Política de privacidad y términos de servicio
-- [ ] Posible integración de analytics
+- [ ] Registro en Google Search Console
+- [ ] Registro en Google Business Profile
+- [ ] Integración de analytics
 
 ---
 
@@ -142,6 +214,11 @@ npm run build
 
 # Previsualizar build de producción
 npm run preview
+
+# Desplegar cambios (después de commit)
+git add .
+git commit -m "Descripción del cambio"
+git push
 ```
 
 ---
@@ -150,28 +227,6 @@ npm run preview
 
 - `Comentarios_pagina.pdf` - Textos curados por el cliente
 - `Comentarios Página.pptx` - Versión original en PowerPoint
-
----
-
-## Notas de Diseño
-
-### Página de Servicios Individuales
-Cada servicio tiene su propia página con:
-- Hero con icono grande y CTA principal
-- Secciones alternas (blanco/gris) para dinamismo
-- Cards de beneficios/tipos
-- CTAs intermedios para aumentar conversión
-- Lista de características con checks
-- CTA final prominente
-- Navegación a otros servicios
-
-### FAQs
-7 preguntas frecuentes con accordion. El JavaScript permite abrir/cerrar y solo muestra una respuesta a la vez.
-
-### Formulario de Contacto
-- Validación HTML5 nativa
-- Estados de loading/éxito/error
-- Preparado para webhook (actualmente muestra en console.log si no hay webhook)
 
 ---
 
@@ -190,12 +245,25 @@ Cada servicio tiene su propia página con:
 | `/servicios/juridico` | Asesoría Jurídica |
 | `/faqs` | Preguntas Frecuentes |
 | `/contacto` | Formulario de Contacto |
+| `/sitemap-index.xml` | Sitemap para Google |
+| `/robots.txt` | Instrucciones para bots |
 
 ---
 
 ## Historial de Cambios
 
-### Enero 2026
+### 21 Enero 2026
+- Configurado deploy automático a Hostinger con GitHub Actions (FTP)
+- Implementado SEO técnico completo:
+  - Sitemap XML automático
+  - robots.txt
+  - Open Graph y Twitter Cards
+  - Schema.org JSON-LD para negocio financiero
+  - Canonical URLs
+  - Meta descriptions optimizadas
+- Sitio en producción: https://asesoriafinancierateran.com
+
+### 20 Enero 2026
 - Proyecto iniciado con estructura base de Astro
 - Creadas todas las páginas principales
 - Implementado diseño responsive
@@ -206,9 +274,26 @@ Cada servicio tiene su propia página con:
 
 ## Próximos Pasos Sugeridos
 
-1. Obtener URL del webhook de n8n y configurar en `contacto.astro`
-2. Recibir fotos del equipo y actualizar `nosotros.astro`
-3. Configurar URLs reales de redes sociales
-4. Crear páginas de Política de Privacidad y Términos
-5. Configurar dominio y hosting
-6. Implementar analytics (Google Analytics / Plausible)
+1. **Crear imagen OG** - `/public/images/og-image.jpg` (1200x630px) con logo y colores de marca
+2. **Registrar en Google Search Console** - Para monitorear indexación
+3. **Registrar en Google Business Profile** - Para aparecer en Google Maps
+4. Obtener URL del webhook de n8n y configurar en `contacto.astro`
+5. Recibir fotos del equipo y actualizar `nosotros.astro`
+6. Configurar URLs reales de redes sociales
+7. Crear páginas de Política de Privacidad y Términos
+8. Implementar analytics (Google Analytics / Plausible)
+
+---
+
+## Notas Técnicas
+
+### Imagen OG (Open Graph)
+La imagen OG es la vista previa que aparece cuando se comparte el sitio en redes sociales (WhatsApp, Facebook, LinkedIn, Twitter).
+
+**Especificaciones:**
+- Tamaño: 1200 x 630 píxeles
+- Ubicación: `/public/images/og-image.jpg`
+- Contenido sugerido: Logo + "Seguros | Inversiones | Créditos" + colores de marca
+
+### BaseLayout.astro
+Contiene toda la configuración SEO. Si necesitas modificar meta tags, Open Graph, o Schema markup, edita este archivo.
