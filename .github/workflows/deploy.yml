@@ -25,7 +25,18 @@ jobs:
       - name: Build Astro site
         run: npm run build
 
-      - name: Deploy to Hostinger via SSH
+      - name: Create target directory via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            mkdir -p ~/domains/${{ secrets.DOMAIN }}/public_html
+            rm -rf ~/domains/${{ secrets.DOMAIN }}/public_html/*
+
+      - name: Deploy files via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -33,7 +44,5 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           source: "dist/*"
-          target: "/home/${{ secrets.SSH_USERNAME }}/domains/${{ secrets.DOMAIN }}/public_html"
+          target: "~/domains/${{ secrets.DOMAIN }}/public_html"
           strip_components: 1
-          overwrite: true
-          rm: true
