@@ -1,0 +1,372 @@
+---
+const navLinks = [
+  { href: '/', label: 'Inicio' },
+  { href: '/nosotros', label: 'Nosotros' },
+  { href: '/servicios', label: 'Servicios', hasSubmenu: true },
+  { href: '/faqs', label: 'FAQs' },
+  { href: '/contacto', label: 'Contacto' },
+];
+
+const servicios = [
+  { href: '/servicios/seguros', label: 'Seguros', icon: '🛡️' },
+  { href: '/servicios/inversiones', label: 'Inversión Inteligente', icon: '📈' },
+  { href: '/servicios/creditos', label: 'Créditos', icon: '💳' },
+  { href: '/servicios/educativo', label: 'Ahorro Educativo', icon: '🎓' },
+  { href: '/servicios/retiro', label: 'Planes de Retiro', icon: '🏖️' },
+  { href: '/servicios/juridico', label: 'Asesoría Jurídica', icon: '⚖️' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="header">
+  <div class="container header-content">
+    <a href="/" class="logo">
+      <span class="logo-text">Asesoría Financiera</span>
+      <span class="logo-accent">Terán</span>
+    </a>
+
+    <nav class="nav">
+      <ul class="nav-list">
+        {navLinks.map(link => (
+          <li class={link.hasSubmenu ? 'has-submenu' : ''}>
+            <a
+              href={link.href}
+              class:list={['nav-link', { active: currentPath === link.href || (link.hasSubmenu && currentPath.startsWith('/servicios')) }]}
+            >
+              {link.label}
+              {link.hasSubmenu && (
+                <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              )}
+            </a>
+            {link.hasSubmenu && (
+              <div class="submenu">
+                <div class="submenu-content">
+                  {servicios.map(servicio => (
+                    <a href={servicio.href} class="submenu-item">
+                      <span class="submenu-icon">{servicio.icon}</span>
+                      <span>{servicio.label}</span>
+                    </a>
+                  ))}
+                  <div class="submenu-footer">
+                    <a href="/servicios" class="submenu-all">Ver todos los servicios</a>
+                  </div>
+                </div>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://wa.me/5564130072" class="btn btn-accent" target="_blank" rel="noopener">
+        WhatsApp
+      </a>
+    </div>
+
+    <button class="mobile-menu-btn" aria-label="Menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .header {
+    background: white;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    gap: 2rem;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  .logo-text {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    font-weight: 500;
+  }
+
+  .logo-accent {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    color: var(--color-text);
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .dropdown-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .has-submenu:hover .dropdown-icon {
+    transform: rotate(180deg);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  .nav-link.active {
+    color: var(--color-primary);
+  }
+
+  /* Submenu */
+  .has-submenu {
+    position: relative;
+  }
+
+  .submenu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 0.75rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .has-submenu:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .submenu-content {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    min-width: 240px;
+    padding: 0.5rem;
+    border: 1px solid var(--color-border);
+  }
+
+  .submenu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: var(--color-text);
+    border-radius: calc(var(--radius) - 4px);
+    transition: all 0.2s ease;
+  }
+
+  .submenu-item:hover {
+    background: var(--color-bg-alt);
+    color: var(--color-primary);
+  }
+
+  .submenu-icon {
+    font-size: 1.25rem;
+  }
+
+  .submenu-footer {
+    border-top: 1px solid var(--color-border);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+  }
+
+  .submenu-all {
+    display: block;
+    text-align: center;
+    padding: 0.75rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: calc(var(--radius) - 4px);
+    transition: all 0.2s ease;
+  }
+
+  .submenu-all:hover {
+    background: var(--color-accent);
+    color: white;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .mobile-menu-btn span {
+    width: 25px;
+    height: 2px;
+    background: var(--color-primary);
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 900px) {
+    .nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      box-shadow: var(--shadow);
+      padding: 1rem;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .nav.show {
+      display: block;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .nav-link {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius);
+    }
+
+    .nav-link:hover {
+      background: var(--color-bg-alt);
+    }
+
+    .nav-link::after {
+      display: none;
+    }
+
+    /* Submenu móvil */
+    .submenu {
+      position: static;
+      transform: none;
+      padding-top: 0;
+      opacity: 1;
+      visibility: visible;
+      display: none;
+    }
+
+    .has-submenu.open .submenu {
+      display: block;
+    }
+
+    .has-submenu.open .dropdown-icon {
+      transform: rotate(180deg);
+    }
+
+    .submenu-content {
+      box-shadow: none;
+      border: none;
+      background: var(--color-bg-alt);
+      margin: 0.5rem 0;
+    }
+
+    .submenu-item {
+      padding: 0.6rem 1rem;
+    }
+
+    .header-actions {
+      display: none;
+    }
+
+    .mobile-menu-btn {
+      display: flex;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+  }
+</style>
+
+<script>
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  const nav = document.querySelector('.nav');
+  const hasSubmenuItems = document.querySelectorAll('.has-submenu');
+
+  // Toggle menú móvil
+  menuBtn?.addEventListener('click', () => {
+    nav?.classList.toggle('show');
+    menuBtn?.classList.toggle('active');
+  });
+
+  // Toggle submenú en móvil
+  hasSubmenuItems.forEach(item => {
+    const link = item.querySelector('.nav-link');
+    link?.addEventListener('click', (e) => {
+      // Solo en móvil
+      if (window.innerWidth <= 900) {
+        e.preventDefault();
+        item.classList.toggle('open');
+      }
+    });
+  });
+
+  // Cerrar menú al hacer clic en un enlace (excepto el de servicios en móvil)
+  document.querySelectorAll('.nav-link, .submenu-item, .submenu-all').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const isSubmenuToggle = link.closest('.has-submenu')?.querySelector('.nav-link') === link;
+      if (window.innerWidth <= 900 && isSubmenuToggle) return;
+
+      nav?.classList.remove('show');
+      menuBtn?.classList.remove('active');
+    });
+  });
+</script>

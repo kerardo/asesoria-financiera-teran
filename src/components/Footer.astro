@@ -1,0 +1,218 @@
+---
+const currentYear = new Date().getFullYear();
+
+const footerLinks = [
+  {
+    title: 'Navegación',
+    links: [
+      { href: '/', label: 'Inicio' },
+      { href: '/nosotros', label: 'Nosotros' },
+      { href: '/servicios', label: 'Servicios' },
+      { href: '/faqs', label: 'FAQs' },
+      { href: '/contacto', label: 'Contacto' },
+    ]
+  },
+  {
+    title: 'Servicios',
+    links: [
+      { href: '/servicios/seguros', label: 'Seguros' },
+      { href: '/servicios/inversiones', label: 'Inversión Inteligente' },
+      { href: '/servicios/creditos', label: 'Créditos' },
+      { href: '/servicios/educativo', label: 'Ahorro Educativo' },
+      { href: '/servicios/retiro', label: 'Planes de Retiro' },
+      { href: '/servicios/juridico', label: 'Asesoría Jurídica' },
+    ]
+  }
+];
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <span class="logo-text">Asesoría Financiera</span>
+          <span class="logo-accent">Terán</span>
+        </div>
+        <p class="footer-description">
+          Tu aliado en asesoría financiera. Protegemos tu futuro con soluciones personalizadas.
+        </p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      {footerLinks.map(section => (
+        <div class="footer-section">
+          <h4>{section.title}</h4>
+          <ul>
+            {section.links.map(link => (
+              <li><a href={link.href}>{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+
+      <div class="footer-section">
+        <h4>Contacto</h4>
+        <ul class="contact-info">
+          <li>
+            <strong>Email:</strong><br />
+            <a href="mailto:contacto@asesoriafinancierateran.com">contacto@asesoriafinancierateran.com</a>
+          </li>
+          <li>
+            <strong>WhatsApp:</strong><br />
+            <a href="https://wa.me/5564130072" target="_blank" rel="noopener">+52 55 6413 0072</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {currentYear} Asesoría Financiera Terán. Todos los derechos reservados.</p>
+      <div class="footer-legal">
+        <a href="#">Política de Privacidad</a>
+        <a href="#">Términos de Servicio</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-primary);
+    color: white;
+    padding: 4rem 0 0;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 3rem;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .logo-text {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+  }
+
+  .logo-accent {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .footer-description {
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-links a {
+    color: rgba(255,255,255,0.7);
+    transition: color 0.3s ease;
+  }
+
+  .social-links a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-section h4 {
+    color: var(--color-accent);
+    margin-bottom: 1.25rem;
+    font-size: 1.1rem;
+  }
+
+  .footer-section ul {
+    list-style: none;
+  }
+
+  .footer-section li {
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-section a {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.95rem;
+  }
+
+  .footer-section a:hover {
+    color: white;
+  }
+
+  .contact-info li {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.95rem;
+  }
+
+  .contact-info strong {
+    color: white;
+  }
+
+  .footer-bottom {
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .footer-legal {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .footer-legal a {
+    color: rgba(255,255,255,0.6);
+  }
+
+  .footer-legal a:hover {
+    color: white;
+  }
+
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
+</style>

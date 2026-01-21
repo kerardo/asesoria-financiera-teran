@@ -1,0 +1,257 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const faqs = [
+  {
+    pregunta: '¿Cómo puedo saber qué plan financiero es el adecuado para mí?',
+    respuesta: 'En Asesoría Financiera Terán, te ofrecemos un análisis detallado de tu situación financiera. Nuestros expertos trabajarán contigo para entender tus objetivos, tu capacidad de ahorro y tu tolerancia al riesgo, para recomendarte el plan financiero más adecuado a tus necesidades, ya sea para crecimiento patrimonial, protección o planificación a largo plazo.'
+  },
+  {
+    pregunta: '¿Cómo puedo empezar a planificar mi retiro?',
+    respuesta: 'Nuestros asesores en planes de retiro te ayudarán a crear un plan de ahorro e inversión adaptado a tu estilo de vida y objetivos a largo plazo. Te guiamos paso a paso para que puedas asegurarte de contar con un ingreso estable cuando llegue el momento de tu retiro. ¡Comienza hoy mismo con una consulta!'
+  },
+  {
+    pregunta: '¿Qué tipos de inversiones ofrecen?',
+    respuesta: 'Te ofrecemos asesoría en inversiones inteligentes, ayudándote a elegir entre acciones, fondos de inversión, bonos, y otras opciones de inversión adaptadas a tu perfil de riesgo. Nuestro objetivo es maximizar tus rendimientos de forma segura y eficiente, siempre respetando tus necesidades y objetivos financieros.'
+  },
+  {
+    pregunta: '¿Ofrecen asesoría en línea o solo presencial?',
+    respuesta: 'Ofrecemos ambas opciones. Podemos agendar consultas en línea a través de videoconferencia para que puedas recibir asesoría desde la comodidad de tu hogar o lugar de trabajo. Si prefieres una consulta presencial, también tenemos opciones disponibles. Estamos aquí para adaptarnos a tu preferencia y necesidades.'
+  },
+  {
+    pregunta: '¿Es posible personalizar los planes educativos para mis hijos?',
+    respuesta: 'Sí, nuestros planes educativos están diseñados para adaptarse a tus metas y presupuesto, asegurando el futuro académico de tus hijos. Ya sea que quieras ahorrar para su educación primaria, secundaria o universitaria, nuestros asesores te ayudarán a crear un plan que se ajuste a tus necesidades.'
+  },
+  {
+    pregunta: '¿Cómo puedo obtener un crédito personal o empresarial?',
+    respuesta: 'En Asesoría Financiera Terán, te apoyamos con el análisis de tu situación financiera y la selección del crédito más adecuado a tus necesidades, ya sea para la compra de un automóvil, hipotecarios, o préstamos empresariales. Te ayudamos a gestionar todo el proceso de manera eficiente y sin complicaciones.'
+  },
+  {
+    pregunta: '¿Qué tipo de asesoría jurídica ofrecen?',
+    respuesta: 'Ofrecemos asesoría jurídica en distintas áreas como derecho civil, derecho familiar (divorcios, custodia de hijos, pensiones alimenticias), y derecho patrimonial (herencias, testamentos, gestión de bienes). Te acompañamos en la resolución de conflictos y en la gestión de trámites legales, brindándote soluciones claras y efectivas.'
+  },
+  {
+    pregunta: '¿Qué servicios ofrecen en Asesoría Financiera Terán?',
+    respuesta: 'Ofrecemos una gama completa de servicios financieros que incluye: Seguros (vida, salud, auto, hogar), Inversión Inteligente, Créditos (personales, auto, hipotecarios, empresariales), Ahorro Educativo, Planes de Retiro y Asesoría Jurídica. Cada servicio está diseñado para adaptarse a tus necesidades específicas.'
+  }
+];
+---
+
+<BaseLayout title="Preguntas Frecuentes" description="Resuelve tus dudas sobre nuestros servicios de asesoría financiera, seguros, inversiones, créditos y más.">
+  <!-- Hero -->
+  <section class="hero-faqs">
+    <div class="container">
+      <h1>Preguntas Frecuentes</h1>
+      <p>Encuentra respuestas a las dudas más comunes</p>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <section class="faqs-section">
+    <div class="container">
+      <div class="faqs-container">
+        {faqs.map((faq, index) => (
+          <div class="faq-item" data-index={index}>
+            <button class="faq-question" aria-expanded="false">
+              <span>{faq.pregunta}</span>
+              <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>{faq.respuesta}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>¿No encontraste lo que buscabas?</h2>
+      <p>Contáctanos y con gusto resolveremos todas tus dudas.</p>
+      <div class="cta-buttons">
+        <a href="https://wa.me/5564130072" class="btn btn-accent" target="_blank" rel="noopener">
+          WhatsApp
+        </a>
+        <a href="/contacto" class="btn btn-outline-light">Contactar</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero-faqs {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .hero-faqs h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-faqs p {
+    font-size: 1.15rem;
+    opacity: 0.95;
+  }
+
+  /* FAQs */
+  .faqs-section {
+    padding: 4rem 0;
+  }
+
+  .faqs-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    background: white;
+  }
+
+  .faq-question {
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+    background: white;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    transition: background 0.3s ease;
+  }
+
+  .faq-question:hover {
+    background: var(--color-bg-alt);
+  }
+
+  .faq-question span {
+    flex: 1;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    color: var(--color-accent);
+  }
+
+  .faq-item.active .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+
+  .faq-item.active .faq-answer {
+    max-height: 500px;
+  }
+
+  .faq-answer p {
+    padding: 0 1.5rem 1.5rem;
+    color: var(--color-text-light);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--color-primary);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    margin-bottom: 2rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-outline-light {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+  }
+
+  .btn-outline-light:hover {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-faqs {
+      padding: 3rem 0;
+    }
+
+    .hero-faqs h1 {
+      font-size: 2rem;
+    }
+
+    .faq-question {
+      padding: 1rem 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .faq-answer p {
+      padding: 0 1.25rem 1.25rem;
+      font-size: 0.95rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+
+      question?.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+
+        // Cerrar todos los demás
+        faqItems.forEach(otherItem => {
+          otherItem.classList.remove('active');
+          otherItem.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+        });
+
+        // Toggle el actual
+        if (!isActive) {
+          item.classList.add('active');
+          question.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  });
+</script>

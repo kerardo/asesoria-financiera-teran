@@ -1,0 +1,315 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const equipo = [
+  {
+    nombre: 'Abraham Terán',
+    rol: 'Asesor financiero y seguros',
+    iniciales: 'AT'
+  },
+  {
+    nombre: 'Isaac Terán',
+    rol: 'Asesor financiero y créditos',
+    iniciales: 'IT'
+  },
+  {
+    nombre: 'Ulises Terán',
+    rol: 'Asesor jurídico',
+    iniciales: 'UT'
+  },
+  {
+    nombre: 'Valeria Bárcenas',
+    rol: 'Asesor jurídico',
+    iniciales: 'VB'
+  }
+];
+---
+
+<BaseLayout title="Nosotros" description="Conoce al equipo de Asesoría Financiera Terán. Expertos en finanzas, seguros, créditos y asesoría jurídica.">
+  <!-- Hero -->
+  <section class="hero-nosotros">
+    <div class="container">
+      <h1>Nosotros</h1>
+      <p>Tu aliado en asesoría financiera</p>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="intro-section">
+    <div class="container">
+      <div class="intro-content">
+        <p class="intro-text">
+          Bienvenido a tu aliado en asesoría financiera. Estamos aquí para ayudarte a planificar tu futuro financiero y a proteger lo que más valoras. Con un enfoque personalizado, nuestras soluciones están diseñadas para adaptarse a tus necesidades y maximizar tu seguridad financiera.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipo -->
+  <section class="equipo-section">
+    <div class="container">
+      <h2 class="section-title">Nuestro Equipo</h2>
+      <p class="section-subtitle">Profesionales comprometidos con tu bienestar financiero</p>
+
+      <div class="equipo-grid">
+        {equipo.map(miembro => (
+          <div class="equipo-card">
+            <div class="equipo-avatar">
+              <span>{miembro.iniciales}</span>
+            </div>
+            <h3>{miembro.nombre}</h3>
+            <p class="equipo-rol">{miembro.rol}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Por qué elegirnos -->
+  <section class="porque-section">
+    <div class="container">
+      <h2 class="section-title">¿Por qué Asesoría Financiera Terán?</h2>
+
+      <div class="porque-grid">
+        <div class="porque-card">
+          <div class="porque-icon">🎯</div>
+          <h3>Enfoque Personalizado</h3>
+          <p>Cada cliente es único. Diseñamos soluciones a la medida de tus necesidades y objetivos financieros específicos.</p>
+        </div>
+
+        <div class="porque-card">
+          <div class="porque-icon">🤝</div>
+          <h3>Equipo Multidisciplinario</h3>
+          <p>Contamos con expertos en finanzas, seguros, créditos y derecho para ofrecerte un servicio integral.</p>
+        </div>
+
+        <div class="porque-card">
+          <div class="porque-icon">💬</div>
+          <h3>Comunicación Directa</h3>
+          <p>Estamos disponibles por WhatsApp y correo electrónico para resolver tus dudas de manera ágil.</p>
+        </div>
+
+        <div class="porque-card">
+          <div class="porque-icon">🏆</div>
+          <h3>Respaldo Institucional</h3>
+          <p>Trabajamos con las mejores instituciones financieras para garantizar la calidad de nuestros productos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>¿Listo para comenzar?</h2>
+      <p>Agenda una asesoría gratuita y conoce cómo podemos ayudarte.</p>
+      <div class="cta-buttons">
+        <a href="https://wa.me/5564130072" class="btn btn-accent" target="_blank" rel="noopener">
+          WhatsApp
+        </a>
+        <a href="/contacto" class="btn btn-outline-light">Contactar</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero-nosotros {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .hero-nosotros h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-nosotros p {
+    font-size: 1.15rem;
+    opacity: 0.95;
+  }
+
+  /* Intro */
+  .intro-section {
+    padding: 4rem 0;
+  }
+
+  .intro-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .intro-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--color-text);
+  }
+
+  /* Equipo */
+  .equipo-section {
+    background: var(--color-bg-alt);
+    padding: 4rem 0;
+  }
+
+  .equipo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .equipo-card {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .equipo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .equipo-avatar {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+  }
+
+  .equipo-avatar span {
+    color: white;
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+
+  .equipo-card h3 {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .equipo-rol {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  /* Por qué */
+  .porque-section {
+    padding: 4rem 0;
+  }
+
+  .porque-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .porque-card {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .porque-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .porque-card h3 {
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .porque-card p {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--color-primary);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    margin-bottom: 2rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-outline-light {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+  }
+
+  .btn-outline-light:hover {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-nosotros {
+      padding: 3rem 0;
+    }
+
+    .hero-nosotros h1 {
+      font-size: 2rem;
+    }
+
+    .intro-text {
+      font-size: 1.05rem;
+    }
+
+    .equipo-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .equipo-card {
+      padding: 1.5rem;
+    }
+
+    .equipo-avatar {
+      width: 80px;
+      height: 80px;
+    }
+
+    .equipo-avatar span {
+      font-size: 1.5rem;
+    }
+
+    .porque-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,336 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const servicios = [
+  {
+    icon: '🛡️',
+    title: 'Seguros',
+    description: 'Protección financiera para ti y tu familia. Seguros de vida, salud, auto y hogar personalizados.',
+    href: '/servicios/seguros',
+    color: '#1e3a5f'
+  },
+  {
+    icon: '📈',
+    title: 'Inversión Inteligente',
+    description: 'Maximiza tus rendimientos con estrategias personalizadas según tu perfil de riesgo.',
+    href: '/servicios/inversiones',
+    color: '#2d5a87'
+  },
+  {
+    icon: '💳',
+    title: 'Créditos',
+    description: 'Créditos personales, auto e hipotecarios. Te acompañamos en todo el proceso.',
+    href: '/servicios/creditos',
+    color: '#c9a227'
+  },
+  {
+    icon: '🎓',
+    title: 'Ahorro Educativo',
+    description: 'Asegura el futuro académico de tus hijos con planes de ahorro flexibles.',
+    href: '/servicios/educativo',
+    color: '#1e3a5f'
+  },
+  {
+    icon: '🏖️',
+    title: 'Planes de Retiro',
+    description: 'Prepárate para disfrutar tu retiro con tranquilidad financiera.',
+    href: '/servicios/retiro',
+    color: '#2d5a87'
+  },
+  {
+    icon: '⚖️',
+    title: 'Asesoría Jurídica',
+    description: 'Soluciones legales claras para ti y tu negocio. Derecho civil, familiar y patrimonial.',
+    href: '/servicios/juridico',
+    color: '#c9a227'
+  }
+];
+---
+
+<BaseLayout title="Servicios" description="Conoce nuestra gama completa de servicios financieros: seguros, inversiones, créditos, planes educativos, retiro y asesoría jurídica.">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Nuestros Servicios</h1>
+      <p>Soluciones financieras integrales para cada etapa de tu vida</p>
+    </div>
+  </section>
+
+  <!-- Servicios Grid -->
+  <section class="servicios-section">
+    <div class="container">
+      <div class="servicios-grid">
+        {servicios.map(servicio => (
+          <a href={servicio.href} class="servicio-card">
+            <span class="servicio-icon">{servicio.icon}</span>
+            <h2>{servicio.title}</h2>
+            <p>{servicio.description}</p>
+            <span class="servicio-link">
+              Conocer más
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Beneficios -->
+  <section class="beneficios-section">
+    <div class="container">
+      <h2 class="section-title">¿Por qué elegirnos?</h2>
+      <div class="beneficios-grid">
+        <div class="beneficio">
+          <div class="beneficio-icon">✓</div>
+          <h3>Asesoría Gratuita</h3>
+          <p>Primera consulta sin costo para conocer tus necesidades.</p>
+        </div>
+        <div class="beneficio">
+          <div class="beneficio-icon">✓</div>
+          <h3>Atención Personalizada</h3>
+          <p>Soluciones diseñadas específicamente para tu situación.</p>
+        </div>
+        <div class="beneficio">
+          <div class="beneficio-icon">✓</div>
+          <h3>Respaldo Institucional</h3>
+          <p>Trabajamos con las mejores instituciones financieras.</p>
+        </div>
+        <div class="beneficio">
+          <div class="beneficio-icon">✓</div>
+          <h3>Acompañamiento Continuo</h3>
+          <p>Estamos contigo en cada paso del proceso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>¿No sabes por dónde empezar?</h2>
+      <p>Cuéntanos tu situación y te orientamos hacia el servicio ideal para ti.</p>
+      <div class="cta-buttons">
+        <a href="https://wa.me/5564130072" class="btn btn-accent" target="_blank" rel="noopener">
+          Hablar por WhatsApp
+        </a>
+        <a href="/contacto" class="btn btn-outline-light">Enviar consulta</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    opacity: 0.95;
+  }
+
+  /* Servicios Grid */
+  .servicios-section {
+    padding: 4rem 0;
+  }
+
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .servicio-card {
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem 2rem;
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .servicio-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--color-accent);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+  }
+
+  .servicio-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-5px);
+    border-color: var(--color-primary);
+    color: inherit;
+  }
+
+  .servicio-card:hover::before {
+    transform: scaleY(1);
+  }
+
+  .servicio-icon {
+    font-size: 3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .servicio-card h2 {
+    color: var(--color-primary);
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .servicio-card p {
+    color: var(--color-text-light);
+    line-height: 1.6;
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .servicio-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .servicio-link svg {
+    transition: transform 0.3s ease;
+  }
+
+  .servicio-card:hover .servicio-link svg {
+    transform: translateX(5px);
+  }
+
+  /* Beneficios */
+  .beneficios-section {
+    padding: 4rem 0;
+    background: var(--color-bg-alt);
+  }
+
+  .beneficios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .beneficio {
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .beneficio-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--color-accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+
+  .beneficio h3 {
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .beneficio p {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--color-primary);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-outline-light {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+  }
+
+  .btn-outline-light:hover {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 3rem 0;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .servicios-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .servicio-card {
+      padding: 2rem 1.5rem;
+    }
+
+    .beneficios-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .cta-section h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>

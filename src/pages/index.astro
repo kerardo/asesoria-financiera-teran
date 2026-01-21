@@ -1,0 +1,610 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const slides = [
+  {
+    titulo: 'Asegura tu futuro con asesoría experta',
+    subtitulo: 'En un mundo lleno de incertidumbres, te ofrecemos las herramientas y el apoyo necesarios para que tomes decisiones financieras acertadas.',
+    cta: { texto: 'Contáctanos', href: '/contacto' },
+    ctaSecundario: { texto: 'Nuestra oferta', href: '/servicios' }
+  },
+  {
+    titulo: 'Protege lo que más importa',
+    subtitulo: 'Seguros de vida, salud, auto y hogar diseñados a tu medida. Tu tranquilidad y la de tu familia es nuestra prioridad.',
+    cta: { texto: 'Ver seguros', href: '/servicios/seguros' },
+    ctaSecundario: { texto: 'Asesoría gratuita', href: '/contacto' }
+  },
+  {
+    titulo: 'Haz crecer tu dinero',
+    subtitulo: 'Inversiones inteligentes y planes de retiro personalizados. Comienza hoy a construir el futuro financiero que mereces.',
+    cta: { texto: 'Invertir ahora', href: '/servicios/inversiones' },
+    ctaSecundario: { texto: 'Planes de retiro', href: '/servicios/retiro' }
+  }
+];
+
+const servicios = [
+  {
+    icon: '🛡️',
+    title: 'Seguros',
+    description: 'Nuestra gama de seguros te ofrece protección financiera para ti y tus seres queridos. Personalizamos cada plan para satisfacer tus necesidades específicas.',
+    href: '/servicios/seguros'
+  },
+  {
+    icon: '📈',
+    title: 'Inversión Inteligente',
+    description: 'Maximización de rendimientos adaptados al perfil de riesgo del cliente.',
+    href: '/servicios/inversiones'
+  },
+  {
+    icon: '💳',
+    title: 'Créditos',
+    description: 'Te apoyamos con créditos personales y empresariales, ya sea auto o hipotecario. Analizamos tu situación financiera, te asesoramos y gestionamos todo el proceso.',
+    href: '/servicios/creditos'
+  },
+  {
+    icon: '🎓',
+    title: 'Ahorro Educativo',
+    description: 'Planes de ahorro para el futuro financiero de los hijos.',
+    href: '/servicios/educativo'
+  },
+  {
+    icon: '🏖️',
+    title: 'Planes de Retiro',
+    description: 'Estrategias de jubilación ajustadas al estilo de vida.',
+    href: '/servicios/retiro'
+  },
+  {
+    icon: '⚖️',
+    title: 'Asesoría Jurídica',
+    description: 'Soluciones claras y efectivas para tus necesidades legales. ¡Tu tranquilidad es nuestra prioridad!',
+    href: '/servicios/juridico'
+  }
+];
+
+const ventajas = [
+  {
+    icon: '✓',
+    title: 'Asesoría gratuita inicial',
+    description: 'Primera consulta sin costo para conocer tus necesidades.'
+  },
+  {
+    icon: '✓',
+    title: 'Planes fiscalmente deducibles',
+    description: 'Optimiza tus impuestos con nuestros productos.'
+  },
+  {
+    icon: '✓',
+    title: 'Atención por WhatsApp',
+    description: 'Comunicación directa y personalizada.'
+  },
+  {
+    icon: '✓',
+    title: 'Soluciones efectivas',
+    description: 'Presentamos opciones de inversión y seguros con respaldo de las mejores instituciones, garantizando resultados que puedes comprobar.'
+  },
+  {
+    icon: '✓',
+    title: 'Educación financiera',
+    description: 'Te enseñamos a tomar mejores decisiones.'
+  },
+  {
+    icon: '✓',
+    title: 'Soporte continuo',
+    description: 'Acompañamiento constante en tu proceso financiero.'
+  }
+];
+---
+
+<BaseLayout title="Inicio" description="Asesoría financiera personalizada. Seguros, inversiones, créditos y planes de retiro con respaldo de las mejores instituciones.">
+  <!-- Hero Slider -->
+  <section class="hero">
+    <div class="hero-slider" id="heroSlider">
+      {slides.map((slide, index) => (
+        <div class={`slide ${index === 0 ? 'active' : ''}`} data-slide={index}>
+          <div class="container">
+            <div class="hero-content">
+              <h1>{slide.titulo}</h1>
+              <p class="hero-subtitle">{slide.subtitulo}</p>
+              <div class="hero-cta">
+                <a href={slide.cta.href} class="btn btn-accent">{slide.cta.texto}</a>
+                <a href={slide.ctaSecundario.href} class="btn btn-outline">{slide.ctaSecundario.texto}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Controles del slider -->
+    <div class="slider-controls">
+      <button class="slider-arrow prev" aria-label="Anterior">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <div class="slider-dots">
+        {slides.map((_, index) => (
+          <button class={`dot ${index === 0 ? 'active' : ''}`} data-dot={index} aria-label={`Ir a slide ${index + 1}`}></button>
+        ))}
+      </div>
+      <button class="slider-arrow next" aria-label="Siguiente">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Barra de progreso -->
+    <div class="slider-progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </section>
+
+  <!-- Servicios Section -->
+  <section class="servicios-section">
+    <div class="container">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <p class="section-subtitle">Soluciones financieras integrales para cada etapa de tu vida</p>
+
+      <div class="services-grid">
+        {servicios.map(servicio => (
+          <a href={servicio.href} class="service-card">
+            <div class="service-icon">{servicio.icon}</div>
+            <h3>{servicio.title}</h3>
+            <p>{servicio.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Ventajas Section -->
+  <section class="ventajas-section">
+    <div class="container">
+      <h2 class="section-title">¿Por qué elegirnos?</h2>
+      <p class="section-subtitle">Beneficios que marcan la diferencia</p>
+
+      <div class="ventajas-grid">
+        {ventajas.map(ventaja => (
+          <div class="ventaja-card">
+            <span class="ventaja-icon">{ventaja.icon}</span>
+            <div class="ventaja-content">
+              <h3>{ventaja.title}</h3>
+              <p>{ventaja.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>No dejes tu futuro al azar</h2>
+        <p>Nuestro equipo está listo para ayudarte a planificar tu bienestar financiero. Ya sea que busques asesoramiento sobre seguros, inversiones o créditos, estamos aquí para ofrecerte soluciones personalizadas.</p>
+        <div class="cta-buttons">
+          <a href="https://wa.me/5564130072" class="btn btn-accent" target="_blank" rel="noopener">
+            Escríbenos por WhatsApp
+          </a>
+          <a href="/contacto" class="btn btn-outline-light">Enviar consulta</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    color: white;
+    padding: 8rem 0;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  /* Imagen de fondo */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+  }
+
+  /* Degradado overlay */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.9) 0%, rgba(45, 90, 135, 0.85) 100%);
+    z-index: 1;
+  }
+
+  .hero > .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.95;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero .btn-outline {
+    border-color: white;
+    color: white;
+  }
+
+  .hero .btn-outline:hover {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  /* Servicios */
+  .servicios-section {
+    background: var(--color-bg-alt);
+  }
+
+  .services-grid .service-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .services-grid .service-card:hover {
+    color: inherit;
+  }
+
+  /* Ventajas */
+  .ventajas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .ventaja-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .ventaja-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--color-accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  .ventaja-content h3 {
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .ventaja-content p {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: var(--color-primary);
+    color: white;
+    text-align: center;
+  }
+
+  .cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-content p {
+    opacity: 0.95;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-outline-light {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+  }
+
+  .btn-outline-light:hover {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 5rem 0;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .hero::before {
+      background-position: center top;
+    }
+
+    .ventajas-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-content h2 {
+      font-size: 1.5rem;
+    }
+
+    .slider-controls {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .slider-arrow {
+      display: none;
+    }
+
+    .slider-dots {
+      order: 1;
+    }
+  }
+
+  /* Hero Slider */
+  .hero-slider {
+    position: relative;
+    z-index: 2;
+  }
+
+  .slide {
+    display: none;
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  .slide.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Slider Controls */
+  .slider-controls {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    z-index: 3;
+  }
+
+  .slider-arrow {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .slider-arrow:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+
+  .slider-dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .dot:hover {
+    border-color: white;
+  }
+
+  .dot.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  /* Progress Bar */
+  .slider-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 3;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: var(--color-accent);
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+</style>
+
+<script>
+  const heroSlider = document.getElementById('heroSlider');
+  const slides = heroSlider?.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const prevBtn = document.querySelector('.slider-arrow.prev');
+  const nextBtn = document.querySelector('.slider-arrow.next');
+  const progressBar = document.getElementById('progressBar');
+
+  let currentSlide = 0;
+  const totalSlides = slides?.length || 3;
+  const slideInterval = 6000; // 6 seconds per slide
+  let autoPlayTimer: ReturnType<typeof setInterval>;
+  let progressTimer: ReturnType<typeof setInterval>;
+  let progressWidth = 0;
+
+  function goToSlide(index: number) {
+    if (!slides || !dots) return;
+
+    // Remove active class from all
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+
+    // Add active class to current
+    slides[index]?.classList.add('active');
+    dots[index]?.classList.add('active');
+
+    currentSlide = index;
+    resetProgress();
+  }
+
+  function nextSlide() {
+    const next = (currentSlide + 1) % totalSlides;
+    goToSlide(next);
+  }
+
+  function prevSlide() {
+    const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+    goToSlide(prev);
+  }
+
+  function resetProgress() {
+    progressWidth = 0;
+    if (progressBar) {
+      progressBar.style.width = '0%';
+    }
+  }
+
+  function startProgress() {
+    const increment = 100 / (slideInterval / 100);
+    progressTimer = setInterval(() => {
+      progressWidth += increment;
+      if (progressBar) {
+        progressBar.style.width = `${Math.min(progressWidth, 100)}%`;
+      }
+    }, 100);
+  }
+
+  function startAutoPlay() {
+    stopAutoPlay();
+    startProgress();
+    autoPlayTimer = setInterval(() => {
+      nextSlide();
+    }, slideInterval);
+  }
+
+  function stopAutoPlay() {
+    clearInterval(autoPlayTimer);
+    clearInterval(progressTimer);
+  }
+
+  // Event listeners
+  prevBtn?.addEventListener('click', () => {
+    prevSlide();
+    startAutoPlay();
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    nextSlide();
+    startAutoPlay();
+  });
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      goToSlide(index);
+      startAutoPlay();
+    });
+  });
+
+  // Pause on hover
+  heroSlider?.addEventListener('mouseenter', stopAutoPlay);
+  heroSlider?.addEventListener('mouseleave', startAutoPlay);
+
+  // Start autoplay on load
+  startAutoPlay();
+</script>
